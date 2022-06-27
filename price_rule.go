@@ -16,7 +16,7 @@ type PriceRuleService interface {
 	Get(int64) (*PriceRule, error)
 	Create(PriceRule) (*PriceRule, error)
 	Update(PriceRule) (*PriceRule, error)
-	List() ([]PriceRule, error)
+	List(interface{}) ([]PriceRule, error)
 	Delete(int64) error
 }
 
@@ -147,7 +147,7 @@ func (pr *PriceRule) SetPrerequisiteToEntitlementQuantityRatio(prerequisiteQuant
 
 	pr.PrerequisiteToEntitlementQuantityRatio = &prerequisiteToEntitlementQuantityRatio{
 		PrerequisiteQuantity: pQuant,
-		EntitledQuantity: eQuant,
+		EntitledQuantity:     eQuant,
 	}
 }
 
@@ -160,10 +160,10 @@ func (s *PriceRuleServiceOp) Get(priceRuleID int64) (*PriceRule, error) {
 }
 
 // List retrieves a list of price rules
-func (s *PriceRuleServiceOp) List() ([]PriceRule, error) {
+func (s *PriceRuleServiceOp) List(options interface{}) ([]PriceRule, error) {
 	path := fmt.Sprintf("%s.json", priceRulesBasePath)
 	resource := new(PriceRulesResource)
-	err := s.client.Get(path, resource, nil)
+	err := s.client.Get(path, resource, options)
 	return resource.PriceRules, err
 }
 

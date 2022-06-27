@@ -13,7 +13,7 @@ const discountCodeBasePath = "price_rules/%d/discount_codes"
 type DiscountCodeService interface {
 	Create(int64, PriceRuleDiscountCode) (*PriceRuleDiscountCode, error)
 	Update(int64, PriceRuleDiscountCode) (*PriceRuleDiscountCode, error)
-	List(int64) ([]PriceRuleDiscountCode, error)
+	List(int64, interface{}) ([]PriceRuleDiscountCode, error)
 	Get(int64, int64) (*PriceRuleDiscountCode, error)
 	Delete(int64, int64) error
 }
@@ -63,10 +63,10 @@ func (s *DiscountCodeServiceOp) Update(priceRuleID int64, dc PriceRuleDiscountCo
 }
 
 // List of discount codes
-func (s *DiscountCodeServiceOp) List(priceRuleID int64) ([]PriceRuleDiscountCode, error) {
+func (s *DiscountCodeServiceOp) List(priceRuleID int64, options interface{}) ([]PriceRuleDiscountCode, error) {
 	path := fmt.Sprintf(discountCodeBasePath+".json", priceRuleID)
 	resource := new(DiscountCodesResource)
-	err := s.client.Get(path, resource, nil)
+	err := s.client.Get(path, resource, options)
 	return resource.DiscountCodes, err
 }
 
