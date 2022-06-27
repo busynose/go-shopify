@@ -16,6 +16,7 @@ type DiscountCodeService interface {
 	List(int64, interface{}) ([]PriceRuleDiscountCode, error)
 	Get(int64, int64) (*PriceRuleDiscountCode, error)
 	Delete(int64, int64) error
+	Count(interface{})
 }
 
 // DiscountCodeServiceOp handles communication with the discount code
@@ -81,4 +82,10 @@ func (s *DiscountCodeServiceOp) Get(priceRuleID int64, discountCodeID int64) (*P
 // Delete a discount code
 func (s *DiscountCodeServiceOp) Delete(priceRuleID int64, discountCodeID int64) error {
 	return s.client.Delete(fmt.Sprintf(discountCodeBasePath+"/%d.json", priceRuleID, discountCodeID))
+}
+
+// Count price rule
+func (s *DiscountCodeServiceOp) Count(options interface{}) (int, error) {
+	path := fmt.Sprintf("%s/count.json", discountCodeBasePath)
+	return s.client.Count(path, options)
 }

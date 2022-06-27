@@ -18,6 +18,7 @@ type PriceRuleService interface {
 	Update(PriceRule) (*PriceRule, error)
 	List(interface{}) ([]PriceRule, error)
 	Delete(int64) error
+	Count() (int, error)
 }
 
 // PriceRuleServiceOp handles communication with the price rule related methods of the Shopify API.
@@ -190,6 +191,12 @@ func (s *PriceRuleServiceOp) Delete(priceRuleID int64) error {
 	path := fmt.Sprintf("%s/%d.json", priceRulesBasePath, priceRuleID)
 	err := s.client.Delete(path)
 	return err
+}
+
+// Count price rule
+func (s *PriceRuleServiceOp) Count() (int, error) {
+	path := fmt.Sprintf("%s/count.json", priceRulesBasePath)
+	return s.client.Count(path, nil)
 }
 
 func validateMoney(v string) bool {
