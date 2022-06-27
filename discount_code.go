@@ -16,7 +16,7 @@ type DiscountCodeService interface {
 	List(int64, interface{}) ([]PriceRuleDiscountCode, error)
 	Get(int64, int64) (*PriceRuleDiscountCode, error)
 	Delete(int64, int64) error
-	Count(interface{})
+	Count(interface{}) (int, error)
 }
 
 // DiscountCodeServiceOp handles communication with the discount code
