@@ -36,8 +36,8 @@ type EventListOptions struct {
 	Fields       string    `url:"fields,omitempty"`
 	Limit        int       `url:"limit,omitempty"`
 	SinceID      int64     `url:"since_id,omitempty"`
-	verb         string    `url:"verb,omitempty"`
-	filter       string    `url:"filter,omitempty"`
+	Verb         string    `url:"verb,omitempty"`
+	Filter       string    `url:"filter,omitempty"`
 }
 
 // Event represents a Shopify event
