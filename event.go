@@ -42,16 +42,17 @@ type EventListOptions struct {
 
 // Event represents a Shopify event
 type Event struct {
-	ID          int    `json:"id,omitempty"`
-	SubjectID   int    `json:"subject_id,omitempty"`
-	CreatedAt   string `json:"created_at,omitempty"`
-	SubjectType string `json:"subject_type,omitempty"`
-	Verb        string `json:"verb,omitempty"`
-	Body        string `json:"body,omitempty"`
-	Message     string `json:"message,omitempty"`
-	Author      string `json:"author,omitempty"`
-	Description string `json:"description,omitempty"`
-	Path        string `json:"path,omitempty"`
+	ID          int           `json:"id,omitempty"`
+	SubjectID   int           `json:"subject_id,omitempty"`
+	CreatedAt   string        `json:"created_at,omitempty"`
+	SubjectType string        `json:"subject_type,omitempty"`
+	Verb        string        `json:"verb,omitempty"`
+	Arguments   []interface{} `json:"arguments,omitempty"`
+	Body        string        `json:"body,omitempty"`
+	Message     string        `json:"message,omitempty"`
+	Author      string        `json:"author,omitempty"`
+	Description string        `json:"description,omitempty"`
+	Path        string        `json:"path,omitempty"`
 }
 
 // List events
