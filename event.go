@@ -32,6 +32,7 @@ type EventsResource struct {
 // See: https://help.shopify.com/api/reference/event#index
 type EventListOptions struct {
 	CreatedAtMax time.Time `url:"created_at_max,omitempty"`
+	CreatedAtMin time.Time `url:"created_at_min,omitempty"`
 	Fields       string    `url:"fields,omitempty"`
 	Limit        int       `url:"limit,omitempty"`
 	SinceID      int64     `url:"since_id,omitempty"`
