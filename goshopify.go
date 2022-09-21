@@ -89,6 +89,7 @@ type Client struct {
 	Customer                   CustomerService
 	CustomerAddress            CustomerAddressService
 	Order                      OrderService
+	Event                      EventService
 	Fulfillment                FulfillmentService
 	DraftOrder                 DraftOrderService
 	Shop                       ShopService
@@ -291,6 +292,7 @@ func NewClient(app App, shopName, token string, opts ...Option) *Client {
 	c.ShippingZone = &ShippingZoneServiceOp{client: c}
 	c.ProductListing = &ProductListingServiceOp{client: c}
 	c.AccessScopes = &AccessScopesServiceOp{client: c}
+	c.Event = &EventServiceOp{client: c}
 
 	// apply any options
 	for _, opt := range opts {
