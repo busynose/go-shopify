@@ -56,6 +56,7 @@ type PriceRule struct {
 	PrerequisiteQuantityRange              *prerequisiteQuantityRange              `json:"prerequisite_quantity_range,omitempty"`
 	PrerequisiteShippingPriceRange         *prerequisiteShippingPriceRange         `json:"prerequisite_shipping_price_range,omitempty"`
 	PrerequisiteToEntitlementQuantityRatio *prerequisiteToEntitlementQuantityRatio `json:"prerequisite_to_entitlement_quantity_ratio,omitempty"`
+	CustomerSegmentPrerequisiteIds         []int64                                 `json:"customer_segment_prerequisite_ids,omitempty"`
 }
 
 type prerequisiteSubtotalRange struct {

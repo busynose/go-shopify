@@ -117,6 +117,7 @@ type Client struct {
 	ShippingZone               ShippingZoneService
 	ProductListing             ProductListingService
 	AccessScopes               AccessScopesService
+	GiftCard                   GiftCardService
 }
 
 // A general response error that follows a similar layout to Shopify's response
@@ -293,6 +294,7 @@ func NewClient(app App, shopName, token string, opts ...Option) *Client {
 	c.ProductListing = &ProductListingServiceOp{client: c}
 	c.AccessScopes = &AccessScopesServiceOp{client: c}
 	c.Event = &EventServiceOp{client: c}
+	c.GiftCard = &GiftCardServiceOp{client: c}
 
 	// apply any options
 	for _, opt := range opts {
