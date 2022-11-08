@@ -14,7 +14,7 @@ type GiftCardService interface {
 	List(interface{}) ([]GiftCard, error)
 	//Count(interface{}) (int, error)
 	//Get(int64, interface{}) (*GiftCard, error)
-	//Create(GiftCard) (*GiftCard, error)
+	Create(GiftCard) (*GiftCard, error)
 	//Update(GiftCard) (*GiftCard, error)
 	//Delete(int64) error
 }
@@ -24,22 +24,23 @@ type GiftCardServiceOp struct {
 }
 
 type GiftCard struct {
-	ID             int64            `json:"id"`
-	Balance        *decimal.Decimal `json:"balance"`
-	InitialValue   *decimal.Decimal `json:"initial_value"`
-	CreatedAt      *time.Time       `json:"created_at"`
-	UpdatedAt      *time.Time       `json:"updated_at"`
-	DisabledAt     *time.Time       `json:"disabled_at"`
-	ExpiresOn      *time.Time       `json:"expires_on"`
-	Currency       string           `json:"currency"`
-	LineItemID     int64            `json:"line_item_id"`
-	APIClientID    int64            `json:"api_client_id"`
-	UserID         int64            `json:"user_id"`
-	CustomerID     int64            `json:"customer_id"`
-	Note           string           `json:"note"`
-	TemplateSuffix string           `json:"template_suffix"`
-	LastCharacters string           `json:"last_characters"`
-	OrderID        string           `json:"order_id"`
+	ID             int64            `json:"id,omitempty"`
+	Balance        *decimal.Decimal `json:"balance,omitempty"`
+	Code           string           `json:"code,omitempty"`
+	CreatedAt      *time.Time       `json:"created_at,omitempty"`
+	UpdatedAt      *time.Time       `json:"updated_at,omitempty"`
+	DisabledAt     *time.Time       `json:"disabled_at,omitempty"`
+	InitialValue   *decimal.Decimal `json:"initial_value,omitempty"`
+	ExpiresOn      string           `json:"expires_on,omitempty"`
+	Currency       string           `json:"currency,omitempty"`
+	LineItemID     int64            `json:"line_item_id,omitempty"`
+	APIClientID    int64            `json:"api_client_id,omitempty"`
+	UserID         int64            `json:"user_id,omitempty"`
+	CustomerID     int64            `json:"customer_id,omitempty"`
+	Note           string           `json:"note,omitempty"`
+	TemplateSuffix string           `json:"template_suffix,omitempty"`
+	LastCharacters string           `json:"last_characters,omitempty"`
+	OrderID        string           `json:"order_id,omitempty"`
 }
 
 type GiftCardResource struct {
@@ -78,4 +79,13 @@ func (s *GiftCardServiceOp) ListWithPagination(options interface{}) ([]GiftCard,
 	}
 
 	return resource.GiftCards, pagination, nil
+}
+
+// Create a gift card
+func (s *GiftCardServiceOp) Create(giftCard GiftCard) (*GiftCard, error) {
+	path := fmt.Sprintf("%s.json", giftCardsBasePath)
+	wrappedData := GiftCardResource{GiftCard: &giftCard}
+	resource := new(GiftCardResource)
+	err := s.client.Post(path, wrappedData, resource)
+	return resource.GiftCard, err
 }
