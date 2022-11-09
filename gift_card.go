@@ -40,7 +40,7 @@ type GiftCard struct {
 	Note           string           `json:"note,omitempty"`
 	TemplateSuffix string           `json:"template_suffix,omitempty"`
 	LastCharacters string           `json:"last_characters,omitempty"`
-	OrderID        string           `json:"order_id,omitempty"`
+	OrderID        int64           `json:"order_id,omitempty"`
 }
 
 type GiftCardResource struct {
