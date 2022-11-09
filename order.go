@@ -345,6 +345,10 @@ type Transaction struct {
 	SourceName     string           `json:"source_name,omitempty"`
 	Source         string           `json:"source,omitempty"`
 	PaymentDetails *PaymentDetails  `json:"payment_details,omitempty"`
+	Receipt        struct {
+		GiftCardID             int64  `json:"gift_card_id,omitempty"`
+		GiftCardLastCharacters string `json:"gift_card_last_characters,omitempty"`
+	} `json:"receipt,omitempty"`
 }
 
 type ClientDetails struct {
