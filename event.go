@@ -15,6 +15,7 @@ const eventsResourceName = "events"
 type EventService interface {
 	List(interface{}) ([]Event, error)
 	ListWithPagination(interface{}) ([]Event, *Pagination, error)
+	Count(interface{}) (int, error)
 }
 
 // EventServiceOp handles communication with the event related methods of the
@@ -83,4 +84,9 @@ func (s *EventServiceOp) ListWithPagination(options interface{}) ([]Event, *Pagi
 	}
 
 	return resource.Events, pagination, nil
+}
+
+func (s *EventServiceOp) Count(options interface{}) (int, error) {
+	path := fmt.Sprintf("%s/count.json", eventsBasePath)
+	return s.client.Count(path, options)
 }
