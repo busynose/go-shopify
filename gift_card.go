@@ -15,6 +15,7 @@ type GiftCardService interface {
 	//Count(interface{}) (int, error)
 	//Get(int64, interface{}) (*GiftCard, error)
 	Create(GiftCard) (*GiftCard, error)
+	Disable(id int64) error
 	//Update(GiftCard) (*GiftCard, error)
 	//Delete(int64) error
 }
@@ -40,7 +41,7 @@ type GiftCard struct {
 	Note           string           `json:"note,omitempty"`
 	TemplateSuffix string           `json:"template_suffix,omitempty"`
 	LastCharacters string           `json:"last_characters,omitempty"`
-	OrderID        int64           `json:"order_id,omitempty"`
+	OrderID        int64            `json:"order_id,omitempty"`
 }
 
 type GiftCardResource struct {
@@ -88,4 +89,12 @@ func (s *GiftCardServiceOp) Create(giftCard GiftCard) (*GiftCard, error) {
 	resource := new(GiftCardResource)
 	err := s.client.Post(path, wrappedData, resource)
 	return resource.GiftCard, err
+}
+
+// Disable gift card
+func (s *GiftCardServiceOp) Disable(id int64) error {
+	path := fmt.Sprintf("%s/%d/disable.json", giftCardsBasePath, id)
+	wrappedData := GiftCardResource{GiftCard: &GiftCard{ID: id}}
+	resource := new(GiftCardResource)
+	return s.client.Post(path, wrappedData, resource)
 }
