@@ -144,6 +144,12 @@ type Order struct {
 	ContactEmail          string           `json:"contact_email,omitempty"`
 	Metafields            []Metafield      `json:"metafields,omitempty"`
 	InventoryBehaviour    string           `json:"inventory_behaviour,omitempty"`
+	Company               *Company         `json:"company,omitempty"`
+}
+
+type Company struct {
+	Id         int `json:"id"`
+	LocationId int `json:"location_id"`
 }
 
 type Address struct {
